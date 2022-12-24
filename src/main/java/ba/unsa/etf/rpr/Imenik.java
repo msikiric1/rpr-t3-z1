@@ -1,9 +1,6 @@
 package ba.unsa.etf.rpr;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Imenik {
     private Map<String, TelefonskiBroj> brojevi;
@@ -65,7 +62,18 @@ public class Imenik {
     }
 
     public Set<TelefonskiBroj> izGradaBrojevi(Grad g) {
+        Set<TelefonskiBroj> brojevi = new TreeSet<>(new Comparator<TelefonskiBroj>() {
+            @Override
+            public int compare(TelefonskiBroj o1, TelefonskiBroj o2) {
+                return o1.ispisi().compareTo(o2.ispisi());
+            }
+        });
 
+        for(Map.Entry<String, TelefonskiBroj> entry : this.brojevi.entrySet()) {
+            if(jeLiIzGrada(entry.getValue(), g))
+                brojevi.add(entry.getValue());
+        }
+        return brojevi;
     }
 
     private boolean jeLiIzGrada(TelefonskiBroj broj, Grad g) {
