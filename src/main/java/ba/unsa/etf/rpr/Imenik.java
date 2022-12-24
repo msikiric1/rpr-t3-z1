@@ -81,4 +81,18 @@ public class Imenik {
             return g.equals(((FiksniBroj) broj).getGrad());
         return false;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+
+        int i = 1;
+        for(Map.Entry<String, TelefonskiBroj> entry : brojevi.entrySet()) {
+            builder.append(i).append(". ").append(entry.getKey())
+                        .append(" - ").append(entry.getValue().ispisi())
+                        .append(System.lineSeparator());
+            i++;
+        }
+        return builder.toString();
+    }
 }
