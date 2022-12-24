@@ -40,7 +40,18 @@ public class Imenik {
     }
 
     public String naSlovo(char s) {
-        
+        StringBuilder builder = new StringBuilder();
+
+        int i = 1;
+        for(Map.Entry<String, TelefonskiBroj> entry : brojevi.entrySet()) {
+            if (entry.getKey().startsWith(String.valueOf(s))) {
+                builder.append(i).append(". ").append(entry.getKey())
+                        .append(" - ").append(entry.getValue().ispisi())
+                        .append(System.lineSeparator());
+            }
+            i++;
+        }
+        return builder.toString();
     }
 
     public Set<String> izGrada(Grad g) {
