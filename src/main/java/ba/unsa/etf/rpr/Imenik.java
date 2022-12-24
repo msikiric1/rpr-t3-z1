@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Imenik {
     private Map<String, TelefonskiBroj> brojevi;
@@ -55,10 +56,21 @@ public class Imenik {
     }
 
     public Set<String> izGrada(Grad g) {
-
+        Set<String> osobe = new TreeSet<>(); // TreeSet automatski sortira elemente u rastući poredak
+        for(Map.Entry<String, TelefonskiBroj> entry : brojevi.entrySet()) {
+            if(jeLiIzGrada(entry.getValue(), g))
+                osobe.add(entry.getKey());
+        }
+        return osobe;
     }
 
     public Set<TelefonskiBroj> izGradaBrojevi(Grad g) {
 
+    }
+
+    private boolean jeLiIzGrada(TelefonskiBroj broj, Grad g) {
+        if(broj instanceof FiksniBroj)
+            return g.equals(((FiksniBroj) broj).getGrad());
+        return false;
     }
 }
